@@ -92,9 +92,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if c.strip().lower() == "x":
-                        seg.sink = self.__rotate(dlen - i, j)
+                        seg.sink = self.__rotate(dlen - i, dlen - j)
                     if c.strip().lower() == "o":
-                        seg.source = self.__rotate(dlen - i, j)
+                        seg.source = self.__rotate(dlen - i, dlen - j)
             if seg is not None:
                 segments.append(seg)
         return segments
@@ -117,9 +117,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if row[j].strip().lower() == "x":
-                        seg.source = self.__rotate(dlen - i, j)
+                        seg.source = self.__rotate(dlen - i, dlen - j)
                     if row[j].strip().lower() == "o":
-                        seg.sink = self.__rotate(dlen - i, j)
+                        seg.sink = self.__rotate(dlen - i, dlen - j)
             if seg is not None:
                 segments.append(seg)
         return segments

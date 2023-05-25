@@ -66,7 +66,7 @@ class grid2fp:
             rotated cord as tuple
         """
         r = math.sqrt(2) / 2
-        return ((x - y * r) * self.scale, (y + x * r) * self.scale)
+        return ((x * r - y * r) * self.scale, (x * r + y * r) * self.scale)
 
     def __get_segments(self):
         """Parse the grid for segments."""
@@ -84,6 +84,7 @@ class grid2fp:
             The segment.
         """
         segments = []
+        dlen = len(self.diagram)
         for i, row in enumerate(self.diagram):
             seg = None
             for j, c in enumerate(row):
@@ -91,9 +92,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if c.strip().lower() == "x":
-                        seg.sink = self.__rotate(i, j)
+                        seg.sink = self.__rotate(dlen-i, j)
                     if c.strip().lower() == "o":
-                        seg.source = self.__rotate(i, j)
+                        seg.source = self.__rotate(dlen-i, j)
             if seg is not None:
                 segments.append(seg)
         return segments
@@ -107,6 +108,7 @@ class grid2fp:
             The segment.
         """
         segments = []
+        dlen = len(self.diagram)
         # Get vertical
         for j, c in enumerate(self.diagram[0]):
             seg = None
@@ -115,9 +117,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if row[j].strip().lower() == "x":
-                        seg.source = self.__rotate(i, j)
+                        seg.source = self.__rotate(dlen-i, j)
                     if row[j].strip().lower() == "o":
-                        seg.sink = self.__rotate(i, j)
+                        seg.sink = self.__rotate(dlen-i, j)
             if seg is not None:
                 segments.append(seg)
         return segments

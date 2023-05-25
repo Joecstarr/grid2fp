@@ -7,13 +7,13 @@ Legendrian knot.
 import drawsvg as draw
 import math
 import csv
-from . import grid_segment
+from grid2fp.grid_segment import grid_segment
 
 
 class grid2fp:
     """The grid2fp class."""
 
-    def __init__(self, csv_file=None, diagram=None, eccentricity=0.9) -> None:
+    def __init__(self, csv_file=None, diagram=None, eccentricity=0.9, scale=10) -> None:
         """Init for the grid2fp object.
 
         Parameters
@@ -27,17 +27,21 @@ class grid2fp:
             Bézier controls, by default 0.9
         """
         self.diagram = []
+        if csv_file is None and diagram is None:
+            raise Exception("You need a csv file or a diagram")
+
         if csv_file:
             with open(csv_file) as csvfile:
-                reader = csv.reader(csvfile, delimiter=" ", quotechar="|")
+                reader = csv.reader(csvfile)
                 for row in reader:
                     self.diagram.append(row)
 
         if diagram:
             self.diagram = diagram
-
         self.eccentricity = eccentricity
-        self.__get_segments(diagram)
+        self.scale = scale
+        self.segments = []
+        self.__get_segments()
 
     def __rotate(self, x, y):
         """Do a 45 degree rotation of the point.
@@ -55,7 +59,7 @@ class grid2fp:
             rotated cord as tuple
         """
         r = math.sqrt(2) / 2
-        return (x * r - y * r, x * r + y * r)
+        return ((x * r - y * r) * self.scale, (x * r + y * r) * self.scale)
 
     def __get_segments(self):
         """Parse the grid for segments."""
@@ -76,12 +80,12 @@ class grid2fp:
         for i, row in enumerate(self.diagram):
             seg = None
             for j, c in enumerate(row):
-                if c != "":
+                if c.strip() != "":
                     if seg is None:
                         seg = grid_segment()
-                    if c == "x":
+                    if c.strip().lower() == "x":
                         seg.sink = self.__rotate(i, j)
-                    if c == "o":
+                    if c.strip().lower() == "o":
                         seg.source = self.__rotate(i, j)
             if seg is not None:
                 segments.append(seg)
@@ -100,12 +104,12 @@ class grid2fp:
         for j, c in enumerate(self.diagram[0]):
             seg = None
             for i, row in enumerate(self.diagram):
-                if row[j] != "":
+                if row[j].strip() != "":
                     if seg is None:
                         seg = grid_segment()
-                    if row[j] == "x":
+                    if row[j].strip().lower() == "x":
                         seg.source = self.__rotate(i, j)
-                    if row[j] == "o":
+                    if row[j].strip().lower() == "o":
                         seg.sink = self.__rotate(i, j)
             if seg is not None:
                 segments.append(seg)
@@ -143,23 +147,31 @@ class grid2fp:
             The output file
         pixel_scale : int, optional
             The scaling for pixel features, by default 2
-        """
-        d = draw.Drawing(
-            len(self.diagram[0]),
-            math.sqrt(2) * len(self.diagram[0]),
-            origin=(0, 0),
-            id_prefix="d",
-        )
-        g = draw.Group(
-            stroke_width=0.1,
-            stroke="black",
-            fill="none",
-            transform=f"translate({len(self.diagram[0])/2},0.1)",
-        )
-        for step in self.segments:
-            p = self.__draw_segment(step)
-            g.append(p)
-        d.append(g)
+        scale : int
+            The scale factor for the file
 
-        d.set_pixel_scale(pixel_scale)
-        d.save_svg(file)
+        """
+        try:
+            d = draw.Drawing(
+                self.scale * len(self.diagram[0]),
+                self.scale * math.sqrt(2) * len(self.diagram[0]),
+                origin=(0, 0),
+                id_prefix="d",
+            )
+            g = draw.Group(
+                stroke_width=0.1 * self.scale,
+                stroke="black",
+                fill="none",
+                transform=f"translate({self.scale*len(self.diagram[0])/2},{0.1*self.scale})",
+            )
+            for step in self.segments:
+                p = self.__draw_segment(step)
+                g.append(p)
+            d.append(g)
+
+            d.set_pixel_scale(pixel_scale)
+            d.save_svg(file)
+        except Exception as err:
+            print(
+                f"Unexpected {err=}, {type(err)=}, this is probably because the grid diagram is broken in some way."
+            )

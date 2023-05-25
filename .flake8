@@ -6,4 +6,6 @@ exclude =
         .pytest_cache,
         .vscode,
         test/results
+        setup.py
+        test/*
 max-complexity = 10

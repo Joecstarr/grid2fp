@@ -1,11 +1,11 @@
 # grid2fp
 
-A tool to eat grid diagrams and generate its front projections. 
+A tool to eat grid diagrams and generate its front projections.
 
 ## Disclaimer
 The tool is lightly tested. I would expect bugs and strange behavior. If you find something make an issue.
 
-## Installation 
+## Installation
 
 Install with pip:
 
@@ -36,30 +36,28 @@ diagram = [["x","","o"],["","",""],["o","","x"]]
 
 g = grid2fp(csv_file=csv_path)
 d = g.draw()
-d.save(svg_path)
+d.save_svg(svg_path)
 
-# Option 2 
+# Option 2
 grid2fp(csv_file=csv_path, out_file=svg_path)
 
 # Option 3
 
 g = grid2fp(diagram=diagram)
 d = g.draw()
-d.save(svg_path)
+d.save_svg(svg_path)
 
 # Option 4
 
 g = grid2fp(csv_file=csv_path)
 d = g.draw()
 # make some changes to d with drawsvg
-d.save(svg_path)
-
-
+d.save_svg(svg_path)
 
 ```
 
 ## ToDo
 - [ ] CLI interface
-- [ ] fit canvas to drawing better. 
-- [ ] set string color 
+- [ ] fit canvas to drawing better.
+- [ ] set string color
 - [ ] ???

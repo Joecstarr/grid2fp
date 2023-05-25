@@ -21,12 +21,12 @@ def test_random():
     """TODO: Update Testcase description."""
     g = grid2fp(csv_file=file_location / "random.csv")
     d = g.draw()
-    d.save(file_location / "random.svg")
+    d.save_svg(file_location / "random.svg")
     assert 1 == 1
 
 
 def test_trefoil():
     g = grid2fp(csv_file=file_location / "trefoil.csv")
     d = g.draw()
-    d.save(file_location / "trefoil.svg")
+    d.save_svg(file_location / "trefoil.svg")
     assert 1 == 1

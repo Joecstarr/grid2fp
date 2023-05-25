@@ -13,18 +13,22 @@ from grid2fp.grid_segment import grid_segment
 class grid2fp:
     """The grid2fp class."""
 
-    def __init__(self, csv_file=None, diagram=None, eccentricity=0.9, scale=10) -> None:
+    def __init__(
+        self, csv_file=None, diagram=None, eccentricity=0.9, scale=10, out_file=None
+    ) -> None:
         """Init for the grid2fp object.
 
         Parameters
         ----------
         csv_file : str, optional
             The location of grid diagram as csv, by default None
-        diagram : _type_, optional
+        diagram : array, optional
             A grid diagram, by default None
         eccentricity : float, optional
             How far away to place the
             Bézier controls, by default 0.9
+        out_file : str
+            The output file, by default None
         """
         self.diagram = []
         if csv_file is None and diagram is None:
@@ -42,6 +46,9 @@ class grid2fp:
         self.scale = scale
         self.segments = []
         self.__get_segments()
+        if out_file:
+            d = self.draw()
+            d.save_svg(out_file)
 
     def __rotate(self, x, y):
         """Do a 45 degree rotation of the point.
@@ -138,17 +145,20 @@ class grid2fp:
         p.C(x_ctr1, y_ctr1, x_ctr2, y_ctr2, step.sink[0], step.sink[1])
         return p
 
-    def draw(self, file, pixel_scale=2):
+    def draw(self, pixel_scale=2):
         """Draws the front projection of the given grid as an SVG.
 
         Parameters
         ----------
-        file : str
-            The output file
         pixel_scale : int, optional
             The scaling for pixel features, by default 2
         scale : int
             The scale factor for the file
+
+        Returns
+        -------
+        Drawing
+            The svg for the grid diagram.
 
         """
         try:
@@ -170,7 +180,7 @@ class grid2fp:
             d.append(g)
 
             d.set_pixel_scale(pixel_scale)
-            d.save_svg(file)
+            return d
         except Exception as err:
             print(
                 f"Unexpected {err=}, {type(err)=}, this is probably because the grid diagram is broken in some way."

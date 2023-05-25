@@ -30,3 +30,10 @@ def test_trefoil():
     d = g.draw()
     d.save_svg(file_location / "trefoil.svg")
     assert 1 == 1
+
+
+def test_trefoil():
+    g = grid2fp(csv_file=file_location / "fig1_from_paper.csv")
+    d = g.draw()
+    d.save_svg(file_location / "fig1_from_paper.svg")
+    assert 1 == 1

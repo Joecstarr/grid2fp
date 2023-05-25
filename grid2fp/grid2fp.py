@@ -84,6 +84,7 @@ class grid2fp:
             The segment.
         """
         segments = []
+        dlen = len(self.diagram)
         for i, row in enumerate(self.diagram):
             seg = None
             for j, c in enumerate(row):
@@ -91,9 +92,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if c.strip().lower() == "x":
-                        seg.sink = self.__rotate(i, j)
+                        seg.sink = self.__rotate(dlen - j, i)
                     if c.strip().lower() == "o":
-                        seg.source = self.__rotate(i, j)
+                        seg.source = self.__rotate(dlen - j, i)
             if seg is not None:
                 segments.append(seg)
         return segments
@@ -107,6 +108,7 @@ class grid2fp:
             The segment.
         """
         segments = []
+        dlen = len(self.diagram)
         # Get vertical
         for j, c in enumerate(self.diagram[0]):
             seg = None
@@ -115,9 +117,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if row[j].strip().lower() == "x":
-                        seg.source = self.__rotate(i, j)
+                        seg.source = self.__rotate(dlen - j, i)
                     if row[j].strip().lower() == "o":
-                        seg.sink = self.__rotate(i, j)
+                        seg.sink = self.__rotate(dlen - j, i)
             if seg is not None:
                 segments.append(seg)
         return segments
@@ -163,7 +165,7 @@ class grid2fp:
         """
         try:
             d = draw.Drawing(
-                self.scale * len(self.diagram[0]),
+                self.scale * math.sqrt(2) * len(self.diagram[0]),
                 self.scale * math.sqrt(2) * len(self.diagram[0]),
                 origin=(0, 0),
                 id_prefix="d",

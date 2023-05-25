@@ -66,7 +66,7 @@ class grid2fp:
             rotated cord as tuple
         """
         r = math.sqrt(2) / 2
-        return ((x + y * r) * self.scale, (y - x * r) * self.scale)
+        return ((x - y * r) * self.scale, (y + x * r) * self.scale)
 
     def __get_segments(self):
         """Parse the grid for segments."""

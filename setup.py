@@ -30,10 +30,5 @@ setup(
         "Framework :: IPython",
     ],
     python_requires='>=3',
-    install_requires=[],
-    extras_require={
-        "all": [
-            "drawsvg~=2",
-        ],
-    },
+    install_requires=["drawsvg",]
 )

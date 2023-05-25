@@ -13,7 +13,9 @@ from grid2fp.grid_segment import grid_segment
 class grid2fp:
     """The grid2fp class."""
 
-    def __init__(self, csv_file=None, diagram=None, eccentricity=0.9, scale=10, out_file=None) -> None:
+    def __init__(
+        self, csv_file=None, diagram=None, eccentricity=0.9, scale=10, out_file=None
+    ) -> None:
         """Init for the grid2fp object.
 
         Parameters
@@ -47,7 +49,6 @@ class grid2fp:
         if out_file:
             d = self.draw()
             d.save_svg(out_file)
-
 
     def __rotate(self, x, y):
         """Do a 45 degree rotation of the point.

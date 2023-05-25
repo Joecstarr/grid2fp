@@ -9,3 +9,4 @@ exclude =
         setup.py
         test/*
 max-complexity = 10
+ignore = E501

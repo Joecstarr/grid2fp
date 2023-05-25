@@ -45,9 +45,9 @@ class grid2fp:
         self.segments = []
         self.__get_segments()
         if out_file:
-        	d = self.draw()
-	        d.save_svg(out_file)	
-        	
+            d = self.draw()
+            d.save_svg(out_file)
+
 
     def __rotate(self, x, y):
         """Do a 45 degree rotation of the point.
@@ -153,7 +153,7 @@ class grid2fp:
             The scaling for pixel features, by default 2
         scale : int
             The scale factor for the file
-		
+
         Returns
         -------
         Drawing

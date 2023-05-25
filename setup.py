@@ -25,7 +25,7 @@ setup(
     keywords=["topology", "Legendrian", "Grid Diagram","knot"],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GNU GENERAL PUBLIC LICENSE",
+        "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
         "Framework :: IPython",
     ],

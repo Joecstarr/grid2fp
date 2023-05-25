@@ -20,7 +20,7 @@ Doesn't exist.
 ## Scripting
 
 
-```
+```python
 from grid2fp import grid2fp
 import drawsvg as draw
 

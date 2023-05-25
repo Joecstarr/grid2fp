@@ -41,4 +41,5 @@ jobs:
           name: testlogs
           path: |
             test/results/**/*.*
+            test/*.svg
           retention-days: 90

@@ -1,0 +1,9 @@
+[flake8]
+exclude =
+        .git,
+        __pycache__,
+        docs,
+        .pytest_cache,
+        .vscode,
+        test/results
+max-complexity = 10

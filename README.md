@@ -1,2 +1,3 @@
-# grid_2_fp
-A small tool to convert a grid diagram into an svg
+# grid2fp
+
+A tool to eat grid diagrams and generate its front projection.

@@ -165,7 +165,7 @@ class grid2fp:
         """
         try:
             d = draw.Drawing(
-                self.scale * len(self.diagram[0]),
+                self.scale * math.sqrt(2) * len(self.diagram[0]),
                 self.scale * math.sqrt(2) * len(self.diagram[0]),
                 origin=(0, 0),
                 id_prefix="d",

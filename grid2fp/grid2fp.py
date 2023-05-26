@@ -14,7 +14,15 @@ class grid2fp:
     """The grid2fp class."""
 
     def __init__(
-        self, csv_file=None, diagram=None, eccentricity=0.9, scale=10, out_file=None
+        self,
+        csv_file=None,
+        diagram=None,
+        eccentricity=0.9,
+        scale=10,
+        out_file=None,
+        draw_crossings=True,
+        string_color="black",
+        crossing_color="white",
     ) -> None:
         """Init for the grid2fp object.
 
@@ -43,6 +51,9 @@ class grid2fp:
         if diagram:
             self.diagram = diagram
         self.eccentricity = eccentricity
+        self.draw_crossings = draw_crossings
+        self.string_color = string_color
+        self.crossing_color = crossing_color
         self.scale = scale
         self.segments = []
         self.__get_segments()
@@ -65,15 +76,13 @@ class grid2fp:
         tuple
             rotated cord as tuple
         """
-        r = math.sqrt(2) / 2
-        return ((x * r - y * r) * self.scale, (x * r + y * r) * self.scale)
+        r = 1 / math.sqrt(2)
+        return (-x * r - y * r) * self.scale, (-x * r + y * r) * self.scale
 
     def __get_segments(self):
         """Parse the grid for segments."""
-        self.segments = []
         self.segments.extend(self.__get_segments_horizontal())
         self.segments.extend(self.__get_segments_vertical())
-        # Get horizontal
 
     def __get_segments_horizontal(self):
         """Parse the grid for horizontal segments.
@@ -84,7 +93,6 @@ class grid2fp:
             The segment.
         """
         segments = []
-        dlen = len(self.diagram)
         for i, row in enumerate(self.diagram):
             seg = None
             for j, c in enumerate(row):
@@ -92,9 +100,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if c.strip().lower() == "x":
-                        seg.sink = self.__rotate(dlen - j, i)
+                        seg.sink = (j, i)
                     if c.strip().lower() == "o":
-                        seg.source = self.__rotate(dlen - j, i)
+                        seg.source = (j, i)
             if seg is not None:
                 segments.append(seg)
         return segments
@@ -108,8 +116,6 @@ class grid2fp:
             The segment.
         """
         segments = []
-        dlen = len(self.diagram)
-        # Get vertical
         for j, c in enumerate(self.diagram[0]):
             seg = None
             for i, row in enumerate(self.diagram):
@@ -117,9 +123,9 @@ class grid2fp:
                     if seg is None:
                         seg = grid_segment()
                     if row[j].strip().lower() == "x":
-                        seg.source = self.__rotate(dlen - j, i)
+                        seg.source = (j, i)
                     if row[j].strip().lower() == "o":
-                        seg.sink = self.__rotate(dlen - j, i)
+                        seg.sink = (j, i)
             if seg is not None:
                 segments.append(seg)
         return segments
@@ -134,18 +140,29 @@ class grid2fp:
 
         Returns
         -------
-        Path
-            The svg path segment.
+        Group
+            The svg path segments contained in a group.
         """
+        x, y = self.__rotate(step.source[0], step.source[1])
+        x2, y2 = self.__rotate(step.sink[0], step.sink[1])
+        delta_x = x2 - x
+        x_ctr1 = x + (self.eccentricity * delta_x)
+        x_ctr2 = x2 - (self.eccentricity * delta_x)
+        g = draw.Group()
+        if self.draw_crossings:
+            p = draw.Path(
+                stroke_width=0.2 * self.scale,
+                stroke=self.crossing_color,
+            )
+            p.M(x, y)
+            p.C(x_ctr1, y, x_ctr2, y2, x2, y2)
+            g.append(p)
         p = draw.Path()
-        p.M(step.source[0], step.source[1])
-        delta_x = step.sink[0] - step.source[0]
-        x_ctr1 = step.source[0] + (self.eccentricity * delta_x)
-        x_ctr2 = step.sink[0] - (self.eccentricity * delta_x)
-        y_ctr1 = step.source[1]
-        y_ctr2 = step.sink[1]
-        p.C(x_ctr1, y_ctr1, x_ctr2, y_ctr2, step.sink[0], step.sink[1])
-        return p
+        p.M(x, y)
+        p.C(x_ctr1, y, x_ctr2, y2, x2, y2)
+        g.append(p)
+
+        return g
 
     def draw(self, pixel_scale=2):
         """Draws the front projection of the given grid as an SVG.
@@ -172,9 +189,9 @@ class grid2fp:
             )
             g = draw.Group(
                 stroke_width=0.1 * self.scale,
-                stroke="black",
+                stroke=self.string_color,
                 fill="none",
-                transform=f"translate({self.scale*len(self.diagram[0])/2},{0.1*self.scale})",
+                transform=f"translate({self.scale* math.sqrt(2)*len(self.diagram[0])},{self.scale* math.sqrt(2)*len(self.diagram[0])/2})",
             )
             for step in self.segments:
                 p = self.__draw_segment(step)

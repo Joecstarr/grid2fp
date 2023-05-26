@@ -34,7 +34,7 @@ diagram = [["x","","o"],["","",""],["o","","x"]]
 
 # Option 1
 
-g = grid2fp(csv_file=csv_path)
+g = grid2fp(csv_file=csv_path,draw_crossings=False)
 d = g.draw()
 d.save_svg(svg_path)
 
@@ -49,7 +49,7 @@ d.save_svg(svg_path)
 
 # Option 4
 
-g = grid2fp(csv_file=csv_path)
+g = grid2fp(csv_file=csv_path,string_color = "pink", crossing_color="purple")
 d = g.draw()
 # make some changes to d with drawsvg
 d.save_svg(svg_path)
@@ -58,6 +58,6 @@ d.save_svg(svg_path)
 
 ## ToDo
 - [ ] CLI interface
-- [ ] fit canvas to drawing better.
-- [ ] set string color
+- [x] fit canvas to drawing better.(still not perfect)
+- [x] set string color
 - [ ] ???

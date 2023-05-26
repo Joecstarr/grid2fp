@@ -32,8 +32,9 @@ def test_trefoil():
     assert 1 == 1
 
 
-def test_trefoil():
-    g = grid2fp(csv_file=file_location / "fig1_from_paper.csv")
+def test_fig1():
+    g = grid2fp(csv_file=file_location / "fig1_from_paper.csv",string_color = "pink",
+        crossing_color="purple")
     d = g.draw()
     d.save_svg(file_location / "fig1_from_paper.svg")
     assert 1 == 1

@@ -59,7 +59,7 @@ d.save_svg(svg_path)
 
 x|o| | |
 -|-|-|-|
- |x|o|
+ |x|o| |
  | |x|o|
 o| | |x|
 
@@ -81,7 +81,7 @@ o| |x|
 
 ![un](https://github.com/Joecstarr/grid2fp/assets/52646388/3a080da3-f5aa-4b23-b4b2-a917140cd95a)
 
- | |o| | |x| |
+‎| |o| | |x| |
 -|-|-|-|-|-|-|
  | | | |o| |x|
  |x| | | |o| |

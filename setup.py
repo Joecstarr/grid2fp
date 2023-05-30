@@ -3,7 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-version = "0.0.5"
+version = "0.0.6"
 
 try:
     with open("README.md", "r") as f:

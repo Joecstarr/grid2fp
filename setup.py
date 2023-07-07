@@ -3,7 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-version = "0.0.6"
+version = "0.0.7"
 
 try:
     with open("README.md", "r") as f:
@@ -19,7 +19,7 @@ setup(
     description="A tool to eat grid diagrams and generate its front projection.",
     long_description=long_desc,
     long_description_content_type="text/markdown",
-    author="Casey Duckering",
+    author="Joe Starr",
     # author_email = '',
     url="https://github.com/Joecstarr/grid2fp",
     keywords=["topology", "Legendrian", "Grid Diagram","knot"],

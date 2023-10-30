@@ -193,6 +193,7 @@ class grid2fp:
                 fill="none",
                 transform=f"translate({self.scale* math.sqrt(2)*len(self.diagram[0])},{self.scale* math.sqrt(2)*len(self.diagram[0])/2})",
             )
+            self.segments.reverse()
             for step in self.segments:
                 p = self.__draw_segment(step)
                 g.append(p)

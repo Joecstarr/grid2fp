@@ -63,7 +63,8 @@ x|o| | |
  | |x|o|
 o| | |x|
 
-![random](https://github.com/Joecstarr/grid2fp/assets/52646388/0e22c161-359d-4bb1-a10a-51011e7eefac)
+<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/random.svg"/>
+
 
 o| | |x| |
 -|-|-|-|-|
@@ -72,14 +73,17 @@ o| | |x| |
 x| |o| | |
  |o| | |x|
 
-![trefoil](https://github.com/Joecstarr/grid2fp/assets/52646388/f4b49ff9-9630-4ccf-b1e8-f4d9a50013d8)
+
+<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/trefoil.svg"/>
+
 
 x| |o|
 -|-|-|
  | | |
 o| |x|
 
-![un](https://github.com/Joecstarr/grid2fp/assets/52646388/3a080da3-f5aa-4b23-b4b2-a917140cd95a)
+<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/un.svg"/>
+
 
 ‎| |o| | |x| |
 -|-|-|-|-|-|-|
@@ -90,7 +94,8 @@ o| |x| | | | |
  |o| | |x| | |
 x| | |o| | | |
 
-![fig1_from_paper](https://github.com/Joecstarr/grid2fp/assets/52646388/d349f4c2-bb07-4e6d-9f29-a69ae518a832)
+<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/fig1_from_paper.svg"/>
+
 
 ## ToDo
 - [ ] CLI interface

@@ -55,46 +55,39 @@ d = g.draw()
 d.save_svg(svg_path)
 
 ```
-# Sample images
-
-x|o| | |
--|-|-|-|
- |x|o| |
- | |x|o|
-o| | |x|
-
-<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/random.svg"/>
+## Sample images
 
 
-o| | |x| |
--|-|-|-|-|
- | |x| |o|
- |x| |o| |
-x| |o| | |
- |o| | |x|
+|o| | |x| |
+|-|-|-|-|-|
+| | |x| |o|
+| |x| |o| |
+|x| |o| | |
+| |o| | |x|
 
 
-<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/trefoil.svg"/>
+<img  style="width:400px;height:auto" src="https://raw.githubusercontent.com/Joecstarr/grid2fp/main/test/trefoil.svg"/>
 
 
-x| |o|
--|-|-|
- | | |
-o| |x|
+|x| |o|
+|-|-|-|
+| | | |
+|o| |x|
 
-<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/un.svg"/>
+<img  style="width:400px;height:auto" src="https://raw.githubusercontent.com/Joecstarr/grid2fp/main/test/un.svg"/>
 
 
-‎| |o| | |x| |
--|-|-|-|-|-|-|
- | | | |o| |x|
- |x| | | |o| |
-o| |x| | | | |
- | | |x| | |o|
- |o| | |x| | |
-x| | |o| | | |
+|‎| |o| | |x| |
+|-|-|-|-|-|-|-|
+| | | | |o| |x|
+| |x| | | |o| |
+|o| |x| | | | |
+| | | |x| | |o|
+| |o| | |x| | |
+|x| | |o| | | |
 
-<img  style="background:white;width:400px;height:auto" src="https://github.com/Joecstarr/grid2fp/blob/main/test/fig1_from_paper.svg"/>
+<img  style="width:400px;height:auto" src="https://raw.githubusercontent.com/Joecstarr/grid2fp/main/test/fig1_from_paper.svg"/>
+
 
 
 ## ToDo
